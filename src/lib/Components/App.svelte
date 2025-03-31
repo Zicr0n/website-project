@@ -21,7 +21,7 @@
 </main>
 
 <nav class="fixed w-full h-32 flex items-center px-16 gap-16">
-    <p class="">Alalwani<br>Mohammad<br>Samir</p>
+    <p class="">Alalwani<br>Mohammad<br>Samirs</p>
     <p>{day} {month} <br>{year}</p>
 </nav>
 
