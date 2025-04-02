@@ -8,12 +8,13 @@ Command: npx @threlte/gltf@3.0.0 static/RawGLTF/bot/ybot.glb
 
   import { T } from '@threlte/core'
   import { useGltf, useGltfAnimations, FakeGlowMaterial} from '@threlte/extras'
+  import { base } from '$app/paths';
 
   let { fallback, error, children, ref = $bindable(), ...props } = $props()
 
   ref = new Group()
 
-  const gltf = useGltf('/RawGLTF/bot/ybot.glb')
+  const gltf = useGltf(base + '/RawGLTF/bot/ybot.glb')
 
   export const { actions, mixer } = useGltfAnimations(gltf, ref)
 </script>
