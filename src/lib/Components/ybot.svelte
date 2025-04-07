@@ -4,19 +4,21 @@ Command: npx @threlte/gltf@3.0.0 static/RawGLTF/bot/ybot.glb
 -->
 
 <script>
-  import { Group, MeshStandardMaterial } from 'three'
+  import { Group, Mesh, MeshStandardMaterial } from 'three'
 
   import { T } from '@threlte/core'
   import { useGltf, useGltfAnimations, FakeGlowMaterial} from '@threlte/extras'
   import { base } from '$app/paths';
+  import { onMount } from 'svelte';
 
-  let { fallback, error, children, ref = $bindable(), ...props } = $props()
+  let { fallback, error, children, ref = $bindable(), name="hello", position=[0,0,0],...props } = $props()
 
   ref = new Group()
 
   const gltf = useGltf(base + '/RawGLTF/bot/ybot.glb')
 
   export const { actions, mixer } = useGltfAnimations(gltf, ref)
+  
 </script>
 
 <T
@@ -27,7 +29,13 @@ Command: npx @threlte/gltf@3.0.0 static/RawGLTF/bot/ybot.glb
   {#await gltf}
     {@render fallback?.()}
   {:then gltf}
-    <T.Group name="Scene">
+    <T.Group name="Scene" position={position}>
+
+      <T.Mesh position={[0,1.8,1.5]}>
+        <T.MeshStandardMaterial color="red"/>
+        <T.OctahedronGeometry args={[0.1,6]}/>
+      </T.Mesh>
+
       <T.Group
         name="Armature"
         rotation={[Math.PI / 2, 0, 0]}
@@ -44,7 +52,6 @@ Command: npx @threlte/gltf@3.0.0 static/RawGLTF/bot/ybot.glb
           <T.MeshStandardMaterial color="white" emissive="white" emissiveIntensity={2}/>
         </T.SkinnedMesh>
 
-
         <T.SkinnedMesh
           name="Alpha_Surface"
           geometry={gltf.nodes.Alpha_Surface.geometry}
@@ -52,6 +59,7 @@ Command: npx @threlte/gltf@3.0.0 static/RawGLTF/bot/ybot.glb
           skeleton={gltf.nodes.Alpha_Surface.skeleton}
           castShadow
         >
+        
         <T.MeshStandardMaterial color="#d4af37" roughness={0.3} metalness={0.8}/>
         </T.SkinnedMesh>
       </T.Group>

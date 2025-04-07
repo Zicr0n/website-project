@@ -13,7 +13,7 @@
     <T.MeshStandardMaterial side={DoubleSide} color="green"/>
 </T.Mesh>
 
-<T.Mesh receiveShadow   rotation={[0, -Math.PI * 0.5 , 0]} position={[5,2.5, 0]}>
+<T.Mesh receiveShadow rotation={[0, -Math.PI * 0.5 , 0]} position={[5,2.5, 0]}>
     <T.PlaneGeometry args={[5,5]} />
     <T.MeshStandardMaterial side={DoubleSide} color="blue"/>
 </T.Mesh>
