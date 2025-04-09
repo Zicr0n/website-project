@@ -69,6 +69,10 @@
 
     let mesh
 
+    let aRender = $state(true);
+
+    let screenRef = $state()
+
     
 </script>
 
@@ -77,15 +81,11 @@
 >
 
 <Float scale={0.7} floatIntensity={5}>
-    <HTML transform geometry={new PlaneGeometry}>
-        <div id="computer-wrap">
-            <button style:display="block">Hello</button>
-            <button style:display="block">Hello</button>
-            <button style:display="block">Hello</button>
-            <button style:display="block">Hello</button>
-            <button style:display="block">Hello</button>
-            <button style:display="block">Hello</button>
-        </div>
+    <HTML transform geometry={new PlaneGeometry} autoRender={aRender} bind:ref={screenRef}>
+        {#snippet children({render, startRendering, stopRendering})}
+            <button class="btn-icon" onclick={()=>{ console.log("HELLO")}}>stop rendering</button>
+            <button class="btn-icon">Hello</button>
+        {/snippet}
     </HTML>
 </Float>
 
@@ -145,6 +145,10 @@ target={tweenedTarget.current}
         <Slider label="Y" bind:value={dummyPos.y}/>
         <Slider label="Z" bind:value={dummyPos.z}/>
         <Button label="Dummy" title="Look At Dummy" on:click={()=>LookAtObject(PointOfInterests.dummy)}/>
+    </Folder>
+
+    <Folder label="HTML">
+        <Button label="AutoRender" title="Toggle AutoRender" on:click={()=>{aRender=!aRender; console.log(aRender)}}/>
     </Folder>
 </Pane>
 
